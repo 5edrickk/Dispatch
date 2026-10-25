@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DispatchDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("Default")));
 
-//builder.Services.AddScoped<IIncidentService, IncidentService>();
+builder.Services.AddScoped<IIncidentService, IncidentService>();
 
 builder.Services.AddCors(o => o.AddPolicy("web", p => p
     .WithOrigins("http://localhost:4200")
