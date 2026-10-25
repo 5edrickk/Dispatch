@@ -1,4 +1,6 @@
-enum IncidentType
+namespace Dispatch.Api.Domain;
+
+public enum IncidentType
 {
     Fire,
     Medical,

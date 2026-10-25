@@ -1,4 +1,6 @@
-enum IncidentPriority
+namespace Dispatch.Api.Domain;
+
+public enum IncidentPriority
 {
     Low = 1,
     Medium = 2,

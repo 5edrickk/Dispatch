@@ -1,4 +1,6 @@
-enum IncidentStatus
+namespace Dispatch.Api.Domain;
+
+public enum IncidentStatus
 {
     New = 1,
     Dispatched = 2,

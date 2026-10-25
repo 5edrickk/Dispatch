@@ -1,4 +1,6 @@
-static class IncidentRules
+namespace Dispatch.Api.Domain;
+
+public static class IncidentRules
 {
     public static bool CanTransition(IncidentStatus from, IncidentStatus to) => from switch
     {
