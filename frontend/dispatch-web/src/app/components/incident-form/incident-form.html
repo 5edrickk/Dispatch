@@ -1,0 +1,53 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="form">
+  <h2>New incident</h2>
+
+  <label>
+    Type
+    <select formControlName="type">
+      @for (t of types; track t) {
+        <option [value]="t">{{ t }}</option>
+      }
+    </select>
+  </label>
+
+  <label>
+    Priority
+    <select formControlName="priority">
+      @for (p of priorities; track p) {
+        <option [value]="p">{{ p }}</option>
+      }
+    </select>
+  </label>
+
+  <label>
+    Address
+    <input type="text" formControlName="address" />
+    @if (form.controls.address.touched && form.controls.address.errors; as e) {
+      <small class="error">
+        @if (e['required']) { Address is required. }
+        @else if (e['minlength']) { At least 3 characters. }
+        @else if (e['maxlength']) { At most 200 characters. }
+      </small>
+    }
+  </label>
+
+  <label>
+    Description
+    <textarea rows="3" formControlName="description"></textarea>
+    @if (form.controls.description.touched && form.controls.description.errors; as e) {
+      <small class="error">
+        @if (e['required']) { Description is required. }
+        @else if (e['minlength']) { At least 3 characters. }
+        @else if (e['maxlength']) { At most 1000 characters. }
+      </small>
+    }
+  </label>
+
+  @if (errorMessage()) {
+    <p class="error">{{ errorMessage() }}</p>
+  }
+
+  <button type="submit" [disabled]="form.invalid || submitting()">
+    {{ submitting() ? 'Creating...' : 'Create' }}
+  </button>
+</form>

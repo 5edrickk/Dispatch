@@ -1,4 +1,5 @@
 <main style="max-width: 800px; margin: 0 auto; padding: 24px;">
   <h1>Dispatch Board</h1>
-  <app-incident-list />
+  <app-incident-form (created)="list.add($event)" />
+  <app-incident-list #list />
 </main>
