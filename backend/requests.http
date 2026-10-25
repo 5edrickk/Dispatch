@@ -1,0 +1,70 @@
+@baseUrl = http://localhost:5080
+
+### 1. Create an incident (201 Created)
+POST {{baseUrl}}/api/incidents
+Content-Type: application/json
+
+{
+  "type": "Fire",
+  "priority": "Critical",
+  "address": "99 Rue Imaginaire",
+  "description": "Smoke coming from a warehouse (fictional)."
+}
+
+### 2. List all (closed excluded, sorted by priority)
+GET {{baseUrl}}/api/incidents
+
+### 3. List with filters (type + priority)
+GET {{baseUrl}}/api/incidents?type=Fire&priority=High
+
+### 4. List including closed
+GET {{baseUrl}}/api/incidents?includeClosed=true
+
+### 5. List only closed (explicit status ignores includeClosed)
+GET {{baseUrl}}/api/incidents?status=Closed
+
+### 6. Get one incident (200)
+GET {{baseUrl}}/api/incidents/1
+
+### 7. Get a non-existent id (404)
+GET {{baseUrl}}/api/incidents/9999
+
+### 8. Valid status change: New -> Dispatched (200)
+PATCH {{baseUrl}}/api/incidents/1/status
+Content-Type: application/json
+
+{ "status": "Dispatched" }
+
+### 9. Invalid status change: skipping steps (409 Conflict)
+PATCH {{baseUrl}}/api/incidents/1/status
+Content-Type: application/json
+
+{ "status": "Closed" }
+
+### 10. Status change on a non-existent id (404)
+PATCH {{baseUrl}}/api/incidents/9999/status
+Content-Type: application/json
+
+{ "status": "Dispatched" }
+
+### 11. Validation: invalid body (400)
+POST {{baseUrl}}/api/incidents
+Content-Type: application/json
+
+{
+  "type": "Fire",
+  "priority": "High",
+  "address": "x",
+  "description": ""
+}
+
+### 12. Invalid enum value (400)
+POST {{baseUrl}}/api/incidents
+Content-Type: application/json
+
+{
+  "type": "Fire",
+  "priority": "Banana",
+  "address": "12 Rue Imaginaire",
+  "description": "Invalid priority test (fictional)."
+}
