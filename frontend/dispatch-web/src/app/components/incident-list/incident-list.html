@@ -1,4 +1,42 @@
 <h2>Incidents</h2>
+<div class="filters">
+  <label>
+    Type
+    <select #typeSelect (change)="onTypeChange(typeSelect.value)">
+      <option value="">All</option>
+      @for (t of types; track t) {
+        <option [value]="t">{{ t }}</option>
+      }
+    </select>
+  </label>
+
+  <label>
+    Priority
+    <select #prioritySelect (change)="onPriorityChange(prioritySelect.value)">
+      <option value="">All</option>
+      @for (p of priorities; track p) {
+        <option [value]="p">{{ p }}</option>
+      }
+    </select>
+  </label>
+
+  <label class="check">
+    <input
+      type="checkbox"
+      #closedBox
+      [checked]="showClosed()"
+      (change)="onShowClosedChange(closedBox.checked)"
+    />
+    Show closed
+  </label>
+</div>
+
+@if (actionError()) {
+  <div class="banner" role="alert">
+    <span>{{ actionError() }}</span>
+    <button type="button" (click)="actionError.set(null)" aria-label="Dismiss">×</button>
+  </div>
+}
 
 @if (loading()) {
   <p class="info">Loading...</p>
@@ -17,7 +55,19 @@
         </div>
         <div class="address">{{ incident.address }}</div>
         <div class="description">{{ incident.description }}</div>
-        <small class="date">{{ incident.createdAt | date: 'medium' }}</small>
+        <div class="footer">
+          <small class="date">{{ incident.createdAt | date: 'medium' }}</small>
+          @if (nextLabel(incident.status); as label) {
+            <button
+              type="button"
+              class="action"
+              [disabled]="busyId() === incident.id"
+              (click)="advance(incident)"
+            >
+              {{ label }}
+            </button>
+          }
+        </div>
       </li>
     }
   </ul>
