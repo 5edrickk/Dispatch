@@ -6,7 +6,7 @@ using Dispatch.Api.Services;
 
 public class IncidentRulesTests
 {
-    // ---------- CanTransition: 16 combinações (3 true, 13 false) ----------
+    // ---------- CanTransition: 16 combinations (3 true, 13 false) ----------
 
     [Theory]
     [InlineData(IncidentStatus.New, IncidentStatus.Dispatched, true)]
