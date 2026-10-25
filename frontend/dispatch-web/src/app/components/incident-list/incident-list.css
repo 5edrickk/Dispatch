@@ -1,0 +1,65 @@
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.card {
+  border: 1px solid #e5e7eb;
+  border-left-width: 6px;
+  border-radius: 8px;
+  padding: 12px 16px;
+  background: #fff;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.priority {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.address {
+  color: #374151;
+}
+
+.description {
+  margin: 4px 0;
+}
+
+.date {
+  color: #6b7280;
+}
+
+.info {
+  padding: 16px;
+  color: #374151;
+}
+
+.error {
+  color: #b91c1c;
+}
+
+.priority-critical {
+  border-left-color: #dc2626;
+}
+
+.priority-high {
+  border-left-color: #ea580c;
+}
+
+.priority-medium {
+  border-left-color: #eab308;
+}
+
+.priority-low {
+  border-left-color: #64748b;
+}
