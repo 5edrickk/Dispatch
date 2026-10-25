@@ -1,0 +1,24 @@
+<h2>Incidents</h2>
+
+@if (loading()) {
+  <p class="info">Loading...</p>
+} @else if (error()) {
+  <p class="info error">{{ error() }}</p>
+} @else if (incidents().length === 0) {
+  <p class="info">No incidents.</p>
+} @else {
+  <ul class="list">
+    @for (incident of incidents(); track incident.id) {
+      <li class="card" [class]="'card priority-' + incident.priority.toLowerCase()">
+        <div class="top">
+          <strong>{{ incident.type }}</strong>
+          <span class="priority">{{ incident.priority }}</span>
+          <app-status-badge [status]="incident.status" />
+        </div>
+        <div class="address">{{ incident.address }}</div>
+        <div class="description">{{ incident.description }}</div>
+        <small class="date">{{ incident.createdAt | date: 'medium' }}</small>
+      </li>
+    }
+  </ul>
+}
