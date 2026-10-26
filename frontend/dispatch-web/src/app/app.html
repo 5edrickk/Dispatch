@@ -1,5 +1,14 @@
-<main style="max-width: 800px; margin: 0 auto; padding: 24px;">
-  <h1>Dispatch Board</h1>
-  <app-incident-form (created)="list.add($event)" />
-  <app-incident-list #list />
+<main class="page">
+  <header class="header">
+    <p class="eyebrow">Operations console</p>
+    <h1>Dispatch Board</h1>
+    <p class="subtitle">Most urgent first, then oldest. All incidents and addresses are fictional.</p>
+  </header>
+
+  <app-status-summary [incidents]="list.incidents()" />
+
+  <div class="columns">
+    <app-incident-list #list />
+    <app-incident-form (created)="list.add($event)" />
+  </div>
 </main>

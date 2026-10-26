@@ -1,1 +1,56 @@
-/* You can add global styles to this file, and also import other style files */
+/* Design tokens: docs/design/tokens.md */
+:root {
+  --color-page: #0d1117;
+  --color-panel: #141a22;
+  --color-border: #232c37;
+  --color-text: #e9edf2;
+  --color-muted: #9ba8b8;
+  /* Not in tokens.md: the lighter edge the design uses on buttons, inputs and empty meter bars */
+  --color-border-strong: color-mix(in srgb, var(--color-muted) 30%, var(--color-panel));
+
+  --priority-critical: #ff7466;
+  --priority-high: #ffa24d;
+  --priority-medium: #f0d45e;
+  --priority-low: #93a8c4;
+
+  /* Suffixes match IncidentStatus lowercased, so components can map status -> var */
+  --status-new: #8db8ff;
+  --status-dispatched: #c7aeff;
+  --status-inprogress: #6fd9c4;
+  --status-closed: #9ba8b8;
+
+  --font-heading: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'Instrument Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Native selects, checkboxes and scrollbars render dark */
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--color-page);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+}
+
+/* Form controls don't inherit font or color by default */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Any element with a priority-* class exposes its color to itself and its children */
+.priority-critical { --priority-color: var(--priority-critical); }
+.priority-high     { --priority-color: var(--priority-high); }
+.priority-medium   { --priority-color: var(--priority-medium); }
+.priority-low      { --priority-color: var(--priority-low); }

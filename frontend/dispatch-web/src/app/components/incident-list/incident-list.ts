@@ -10,11 +10,12 @@ import {
   priorityWeight,
 } from '../../models/incident';
 import { IncidentApi } from '../../services/incident-api';
+import { PriorityMeter } from '../priority-meter/priority-meter';
 import { StatusBadge } from '../status-badge/status-badge';
 
 @Component({
   selector: 'app-incident-list',
-  imports: [DatePipe, StatusBadge],
+  imports: [DatePipe, PriorityMeter, StatusBadge],
   templateUrl: './incident-list.html',
   styleUrl: './incident-list.css',
 })

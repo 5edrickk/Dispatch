@@ -29,6 +29,13 @@ const NEXT_STATUS_LABEL: Record<IncidentStatus, string | null> = {
   Closed: null,
 };
 
+const STATUS_LABEL: Record<IncidentStatus, string> = {
+  New: 'New',
+  Dispatched: 'Dispatched',
+  InProgress: 'In progress',
+  Closed: 'Closed',
+};
+
 const PRIORITY_WEIGHT: Record<IncidentPriority, number> = {
   Low: 1,
   Medium: 2,
@@ -42,6 +49,10 @@ export function nextStatus(status: IncidentStatus): IncidentStatus | null {
 
 export function nextStatusLabel(status: IncidentStatus): string | null {
   return NEXT_STATUS_LABEL[status];
+}
+
+export function statusLabel(status: IncidentStatus): string {
+  return STATUS_LABEL[status];
 }
 
 export function priorityWeight(priority: IncidentPriority): number {

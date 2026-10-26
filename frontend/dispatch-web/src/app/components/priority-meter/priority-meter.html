@@ -1,0 +1,6 @@
+<!-- Decorative: the priority is always written next to the meter -->
+<span class="meter" [class]="'meter priority-' + priority().toLowerCase()" aria-hidden="true">
+  @for (bar of bars; track bar) {
+    <span class="bar" [class.filled]="bar <= level()"></span>
+  }
+</span>

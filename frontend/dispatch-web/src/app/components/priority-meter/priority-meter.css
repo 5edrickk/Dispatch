@@ -1,0 +1,20 @@
+.meter {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.bar {
+  width: 4px;
+  border-radius: 1px;
+  background: var(--color-border-strong);
+}
+
+.bar:nth-child(1) { height: 8px; }
+.bar:nth-child(2) { height: 11px; }
+.bar:nth-child(3) { height: 14px; }
+.bar:nth-child(4) { height: 17px; }
+
+.filled {
+  background: var(--priority-color);
+}
