@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 
-import { IncidentStatus } from '../../models/incident';
+import { IncidentStatus, statusLabel } from '../../models/incident';
 
 @Component({
   selector: 'app-status-badge',
@@ -11,4 +11,7 @@ import { IncidentStatus } from '../../models/incident';
 export class StatusBadge {
   // Required signal input: the parent must pass a status
   readonly status = input.required<IncidentStatus>();
+
+  // Exposed so the template can call it
+  readonly label = statusLabel;
 }

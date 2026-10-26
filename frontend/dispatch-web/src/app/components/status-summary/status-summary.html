@@ -1,0 +1,11 @@
+<ul class="summary" aria-label="Incidents by status">
+  @for (s of statuses; track s) {
+    <li class="item">
+      <span class="label">
+        <span class="dot" [style.background]="'var(--status-' + s.toLowerCase() + ')'"></span>
+        {{ label(s) }}
+      </span>
+      <span class="count">{{ counts()[s] }}</span>
+    </li>
+  }
+</ul>

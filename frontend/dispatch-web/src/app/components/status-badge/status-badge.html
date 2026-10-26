@@ -1,3 +1,3 @@
 <span class="badge" [class]="'badge status-' + status().toLowerCase()">
-  {{ status() === 'InProgress' ? 'In progress' : status() }}
+  {{ label(status()) }}
 </span>
