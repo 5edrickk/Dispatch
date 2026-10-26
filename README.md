@@ -63,7 +63,9 @@ dotnet run --project backend/src/Dispatch.Api
 Interface :
 
 ```bash
-cd frontend/dispatch-web && npm install && ng serve
+cd frontend/dispatch-web
+npm install
+ng serve
 ```
 
 - Interface : http://localhost:4200
