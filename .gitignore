@@ -9,3 +9,4 @@ dist/
 .vs/
 roadmap.fr.md
 *.db
+docs/design/
