@@ -1,13 +1,14 @@
 .badge {
   display: inline-block;
-  padding: 2px 10px;
+  padding: 3px 10px;
   border-radius: 999px;
   font-size: 0.8rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--badge-color);
+  background: color-mix(in srgb, var(--badge-color) 16%, transparent);
 }
 
-.status-new        { background: #2563eb; }
-.status-dispatched { background: #7c3aed; }
-.status-inprogress { background: #d97706; }
-.status-closed     { background: #6b7280; }
+.status-new        { --badge-color: var(--status-new); }
+.status-dispatched { --badge-color: var(--status-dispatched); }
+.status-inprogress { --badge-color: var(--status-inprogress); }
+.status-closed     { --badge-color: var(--status-closed); }
