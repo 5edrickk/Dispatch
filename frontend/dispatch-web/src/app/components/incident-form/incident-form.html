@@ -1,53 +1,76 @@
 <form [formGroup]="form" (ngSubmit)="submit()" class="form">
   <h2>New incident</h2>
 
-  <label>
-    Type
-    <select formControlName="type">
+  <fieldset>
+    <legend>Type</legend>
+    <div class="options">
       @for (t of types; track t) {
-        <option [value]="t">{{ t }}</option>
+        <label class="option">
+          <input type="radio" name="type" formControlName="type" [value]="t" />
+          {{ t }}
+        </label>
       }
-    </select>
-  </label>
+    </div>
+  </fieldset>
 
-  <label>
-    Priority
-    <select formControlName="priority">
+  <fieldset>
+    <legend>Priority</legend>
+    <div class="options">
       @for (p of priorities; track p) {
-        <option [value]="p">{{ p }}</option>
+        <label class="option">
+          <input type="radio" name="priority" formControlName="priority" [value]="p" />
+          <app-priority-meter [priority]="p" />
+          {{ p }}
+        </label>
       }
-    </select>
-  </label>
+    </div>
+  </fieldset>
 
-  <label>
-    Address
-    <input type="text" formControlName="address" />
+  <div class="field">
+    <label for="address">Address</label>
+    <input
+      id="address"
+      type="text"
+      formControlName="address"
+      placeholder="e.g. 12 Rue Imaginaire"
+      aria-describedby="address-hint"
+    />
     @if (form.controls.address.touched && form.controls.address.errors; as e) {
-      <small class="error">
+      <small id="address-hint" class="error">
         @if (e['required']) { Address is required. }
         @else if (e['minlength']) { At least 3 characters. }
         @else if (e['maxlength']) { At most 200 characters. }
       </small>
+    } @else {
+      <small id="address-hint" class="hint">3 to 200 characters. Use a fictional address.</small>
     }
-  </label>
+  </div>
 
-  <label>
-    Description
-    <textarea rows="3" formControlName="description"></textarea>
+  <div class="field">
+    <label for="description">Description</label>
+    <textarea
+      id="description"
+      rows="4"
+      formControlName="description"
+      placeholder="What was reported?"
+      aria-describedby="description-hint"
+    ></textarea>
     @if (form.controls.description.touched && form.controls.description.errors; as e) {
-      <small class="error">
+      <small id="description-hint" class="error">
         @if (e['required']) { Description is required. }
         @else if (e['minlength']) { At least 3 characters. }
         @else if (e['maxlength']) { At most 1000 characters. }
       </small>
+    } @else {
+      <small id="description-hint" class="hint">3 to 1000 characters.</small>
     }
-  </label>
+  </div>
 
   @if (errorMessage()) {
-    <p class="error">{{ errorMessage() }}</p>
+    <p class="error" role="alert">{{ errorMessage() }}</p>
   }
 
-  <button type="submit" [disabled]="form.invalid || submitting()">
-    {{ submitting() ? 'Creating...' : 'Create' }}
+  <button type="submit" class="submit" [disabled]="form.invalid || submitting()">
+    {{ submitting() ? 'Creating...' : 'Create incident' }}
   </button>
 </form>

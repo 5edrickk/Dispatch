@@ -7,10 +7,11 @@ import {
   IncidentType,
 } from '../../models/incident';
 import { IncidentApi } from '../../services/incident-api';
+import { PriorityMeter } from '../priority-meter/priority-meter';
 
 @Component({
   selector: 'app-incident-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, PriorityMeter],
   templateUrl: './incident-form.html',
   styleUrl: './incident-form.css',
 })
@@ -22,7 +23,8 @@ export class IncidentForm {
   readonly created = output<Incident>();
 
   readonly types: IncidentType[] = ['Fire', 'Medical', 'Police', 'Municipal'];
-  readonly priorities: IncidentPriority[] = ['Low', 'Medium', 'High', 'Critical'];
+  // Display order: most urgent first, as in the design
+  readonly priorities: IncidentPriority[] = ['Critical', 'High', 'Medium', 'Low'];
 
   readonly submitting = signal(false);
   readonly errorMessage = signal<string | null>(null);
