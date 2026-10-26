@@ -40,6 +40,15 @@ h3 {
   font-family: var(--font-heading);
 }
 
+/* Form controls don't inherit font or color by default */
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
 /* Any element with a priority-* class exposes its color to itself and its children */
 .priority-critical { --priority-color: var(--priority-critical); }
 .priority-high     { --priority-color: var(--priority-high); }

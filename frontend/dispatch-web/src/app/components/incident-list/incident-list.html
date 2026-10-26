@@ -1,34 +1,45 @@
-<h2>Incidents</h2>
-<div class="filters">
-  <label>
-    Type
-    <select #typeSelect (change)="onTypeChange(typeSelect.value)">
-      <option value="">All</option>
-      @for (t of types; track t) {
-        <option [value]="t">{{ t }}</option>
-      }
-    </select>
-  </label>
+<div class="head">
+  <div>
+    <h2>Queue</h2>
+    @if (!loading() && !error()) {
+      <p class="count">
+        {{ incidents().length }} {{ incidents().length === 1 ? 'incident' : 'incidents' }}
+        {{ showClosed() ? 'shown' : 'open' }}
+      </p>
+    }
+  </div>
 
-  <label>
-    Priority
-    <select #prioritySelect (change)="onPriorityChange(prioritySelect.value)">
-      <option value="">All</option>
-      @for (p of priorities; track p) {
-        <option [value]="p">{{ p }}</option>
-      }
-    </select>
-  </label>
+  <div class="filters">
+    <label>
+      Type
+      <select #typeSelect (change)="onTypeChange(typeSelect.value)">
+        <option value="">All</option>
+        @for (t of types; track t) {
+          <option [value]="t">{{ t }}</option>
+        }
+      </select>
+    </label>
 
-  <label class="check">
-    <input
-      type="checkbox"
-      #closedBox
-      [checked]="showClosed()"
-      (change)="onShowClosedChange(closedBox.checked)"
-    />
-    Show closed
-  </label>
+    <label>
+      Priority
+      <select #prioritySelect (change)="onPriorityChange(prioritySelect.value)">
+        <option value="">All</option>
+        @for (p of priorities; track p) {
+          <option [value]="p">{{ p }}</option>
+        }
+      </select>
+    </label>
+
+    <label class="check">
+      <input
+        type="checkbox"
+        #closedBox
+        [checked]="showClosed()"
+        (change)="onShowClosedChange(closedBox.checked)"
+      />
+      Show closed
+    </label>
+  </div>
 </div>
 
 @if (actionError()) {
@@ -47,27 +58,30 @@
 } @else {
   <ul class="list">
     @for (incident of incidents(); track incident.id) {
-      <li class="card" [class]="'card priority-' + incident.priority.toLowerCase()">
-        <div class="top">
-          <strong>{{ incident.type }}</strong>
-          <span class="priority">{{ incident.priority }}</span>
-          <app-status-badge [status]="incident.status" />
+      <li class="row" [class]="'row priority-' + incident.priority.toLowerCase()">
+        <div class="main">
+          <div class="top">
+            <strong class="type">{{ incident.type }}</strong>
+            <app-priority-meter [priority]="incident.priority" />
+            <span class="priority">{{ incident.priority }}</span>
+            <app-status-badge [status]="incident.status" />
+          </div>
+          <div class="address">{{ incident.address }}</div>
+          <div class="description">{{ incident.description }}</div>
         </div>
-        <div class="address">{{ incident.address }}</div>
-        <div class="description">{{ incident.description }}</div>
-        <div class="footer">
-          <small class="date">{{ incident.createdAt | date: 'medium' }}</small>
-          @if (nextLabel(incident.status); as label) {
-            <button
-              type="button"
-              class="action"
-              [disabled]="busyId() === incident.id"
-              (click)="advance(incident)"
-            >
-              {{ label }}
-            </button>
-          }
-        </div>
+        <time class="date" [attr.datetime]="incident.createdAt">
+          {{ incident.createdAt | date: 'MMM d, h:mm a' }}
+        </time>
+        @if (nextLabel(incident.status); as label) {
+          <button
+            type="button"
+            class="action"
+            [disabled]="busyId() === incident.id"
+            (click)="advance(incident)"
+          >
+            {{ label }} <span aria-hidden="true">→</span>
+          </button>
+        }
       </li>
     }
   </ul>
