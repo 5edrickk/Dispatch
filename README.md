@@ -3,6 +3,8 @@
 Mini tableau de bord de répartition d'incidents d'urgence. **Toutes les données sont fictives.**
 A small emergency-incident dispatch board. **All data is fictional.**
 
+![Dispatch Board: status counts, the priority-sorted queue and the new-incident form](docs/screenshot.png)
+
 ---
 
 ## Français
