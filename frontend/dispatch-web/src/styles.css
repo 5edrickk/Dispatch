@@ -5,6 +5,8 @@
   --color-border: #232c37;
   --color-text: #e9edf2;
   --color-muted: #9ba8b8;
+  /* Not in tokens.md: the lighter edge the design uses on buttons, inputs and empty meter bars */
+  --color-border-strong: color-mix(in srgb, var(--color-muted) 30%, var(--color-panel));
 
   --priority-critical: #ff7466;
   --priority-high: #ffa24d;
@@ -37,3 +39,9 @@ h2,
 h3 {
   font-family: var(--font-heading);
 }
+
+/* Any element with a priority-* class exposes its color to itself and its children */
+.priority-critical { --priority-color: var(--priority-critical); }
+.priority-high     { --priority-color: var(--priority-high); }
+.priority-medium   { --priority-color: var(--priority-medium); }
+.priority-low      { --priority-color: var(--priority-low); }
